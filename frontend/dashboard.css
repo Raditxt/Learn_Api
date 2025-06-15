@@ -1,0 +1,82 @@
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Chart & KPI Loading/Error Styling */
+.chart-container {
+    position: relative;
+    height: 350px; /* Fixed height for charts for consistency */
+    width: 100%;
+}
+/* Ensure KPI values also have enough space for overlays */
+.kpi-value-container { /* New container for KPI text and overlays */
+    position: relative;
+    min-height: 100px; /* Adjust as needed based on content */
+    display: flex; /* Flexbox to center content */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.loading-overlay, .error-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+.hidden-overlay {
+    opacity: 0;
+    pointer-events: none; /* Allows clicks through when hidden */
+}
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #4f46e5; /* indigo-600 */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animations */
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fade-in-down { animation: fade-in-down 0.8s ease-out forwards; }
+.animate-slide-in-up { animation: slide-in-up 0.8s ease-out forwards; }
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
