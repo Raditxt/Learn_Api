@@ -32,7 +32,7 @@ def get_db_connection():
     
     return pyodbc.connect(conn_str)
 
-# --- API Endpoints Berorientasi Bisnis ---
+# Page
 @app.route('/product')
 def product_page():
     return render_template('product.html')
@@ -586,6 +586,7 @@ def get_available_years():
     finally:
         if conn: conn.close()
 
+# Products
 @app.route('/api/products', methods=['POST'])
 def create_product():
     """
@@ -730,6 +731,7 @@ def get_products():
         if 'conn' in locals():
             conn.close()
 
+#Customers
 @app.route('/api/customers', methods=['GET'])
 def get_customers():
     """
@@ -854,6 +856,7 @@ def delete_customer(id_pelanggan):
         if 'conn' in locals() and conn:
             conn.close()
 
+#Karyawan
 @app.route('/api/employees', methods=['GET'])
 def get_employees():
     """

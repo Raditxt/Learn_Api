@@ -1,5 +1,6 @@
-
-/* Custom Scrollbar */
+/* ===============================
+   Global Scrollbar (Webkit)
+================================= */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -16,29 +17,67 @@
     background: #555;
 }
 
-/* Chart & KPI Loading/Error Styling */
+/* ===============================
+   KPI Cards
+================================= */
+.kpi-card {
+    background-color: #ffffff;
+    border-radius: 1rem; /* 16px */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100px;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+.kpi-card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+.kpi-title {
+    font-size: 0.875rem;
+    color: #6B7280; /* gray-500 */
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.kpi-value {
+    font-size: 2rem;
+    color: #4F46E5; /* indigo-600 */
+    font-weight: 700;
+}
+
+/* ===============================
+   Chart Containers
+================================= */
 .chart-container {
     position: relative;
-    height: 350px; /* Fixed height for charts for consistency */
+    height: 350px;
     width: 100%;
 }
-/* Ensure KPI values also have enough space for overlays */
-.kpi-value-container { /* New container for KPI text and overlays */
+.chart-wrapper {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ===============================
+   KPI Loading / Error Overlay
+================================= */
+.kpi-value-container {
     position: relative;
-    min-height: 100px; /* Adjust as needed based on content */
-    display: flex; /* Flexbox to center content */
+    min-height: 100px;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
-
-.loading-overlay, .error-overlay {
+.loading-overlay,
+.error-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,11 +87,11 @@
 }
 .hidden-overlay {
     opacity: 0;
-    pointer-events: none; /* Allows clicks through when hidden */
+    pointer-events: none;
 }
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #4f46e5; /* indigo-600 */
+    border-left-color: #4f46e5;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -63,20 +102,110 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Animations */
+/* ===============================
+   Animation Classes
+================================= */
 @keyframes fade-in-down {
     from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes slide-in-up {
     from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fade-in {
     from { opacity: 0; }
-    to { opacity: 1; }
+    to   { opacity: 1; }
+}
+.animate-fade-in-down {
+    animation: fade-in-down 0.8s ease-out forwards;
+}
+.animate-slide-in-up {
+    animation: slide-in-up 0.8s ease-out forwards;
+}
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
 }
 
-.animate-fade-in-down { animation: fade-in-down 0.8s ease-out forwards; }
-.animate-slide-in-up { animation: slide-in-up 0.8s ease-out forwards; }
-.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+/* ===============================
+   Navigation
+================================= */
+.nav-link {
+    padding: 0.5rem 1rem;
+    color: #4B5563; /* gray-700 */
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.nav-link:hover {
+    color: #1F2937; /* gray-900 */
+    background-color: #F9FAFB;
+    border-bottom: 2px solid #E0E7FF; /* indigo-100 */
+}
+.nav-link.active {
+    color: #4F46E5; /* indigo-600 */
+    font-weight: 600;
+    border-bottom: 2px solid #4F46E5;
+}
+
+/* ===============================
+   Filter Section (Responsive Grid)
+================================= */
+.filter-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.filter-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===============================
+   Buttons
+================================= */
+.btn-primary {
+    background-color: #4F46E5;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: #4338CA;
+}
+.btn-outline {
+    background-color: transparent;
+    color: #4F46E5;
+    border: 2px solid #4F46E5;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-outline:hover {
+    background-color: #EEF2FF;
+}
+
+/* ===============================
+   Utilities
+================================= */
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.text-muted {
+    color: #6B7280;
+}
+.mt-4 {
+    margin-top: 1rem;
+}
+.mb-4 {
+    margin-bottom: 1rem;
+}

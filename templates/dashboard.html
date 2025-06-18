@@ -9,31 +9,29 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <link rel="stylesheet" href="/static/dashboard.css">
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    
+<body class="bg-gray-50 font-sans text-gray-800">
+    <div class="container mx-auto px-4 py-6 lg:px-8">
+        <header class="mb-10">
+            <h1 class="text-center text-4xl font-bold text-indigo-700 mb-6">Dashboard Analitik E-commerce</h1>
+            <nav class="flex justify-center gap-6 text-lg font-medium border-b border-gray-200 pb-2">
+                <a href="dashboard" class="nav-link hover:text-indigo-600">Dashboard</a>
+                <a href="product" class="nav-link hover:text-indigo-600">Produk</a>
+                <a href="customers" class="nav-link hover:text-indigo-600">Pelanggan</a>
+                <a href="karyawan" class="nav-link hover:text-indigo-600">Karyawan</a>
+                <a href="penjualan" class="nav-link hover:text-indigo-600">Penjualan</a>
+            </nav>
+        </header>
 
-    <div class="container mx-auto p-4 md:p-8">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 text-center animate-fade-in-down">Dashboard E-commerce Analitik Agres</h1>
-
-                <!-- Navigation Links (NEW) -->
-                <nav class="mb-8 flex justify-center space-x-6 text-xl font-medium">
-                    <a href="dashboard" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Dashboard</a>
-                    <a href="product" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Product</a>
-                    <a href="customers" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Customers</a>
-                    <a href="karyawan" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Karyawan</a>
-                    <a href="penjualan" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Penjualan</a>
-                </nav>
-        
-
-        <div class="bg-white shadow-xl rounded-lg p-6 mb-8 flex flex-wrap items-end gap-4 border border-gray-200 animate-slide-in-up">
-            <div class="w-full md:w-auto flex-grow">
-                <label for="yearFilter" class="block text-gray-700 text-sm font-bold mb-2">Pilih Tahun:</label>
-                <select id="yearFilter" class="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out">
+        <!-- Filter Panel -->
+        <section class="bg-white p-6 rounded-xl shadow-md mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
+                <label for="yearFilter" class="block text-sm font-semibold text-gray-600 mb-1">Tahun:</label>
+                <select id="yearFilter" class="w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
                 </select>
             </div>
-            <div class="w-full md:w-auto flex-grow">
-                <label for="quarterFilter" class="block text-gray-700 text-sm font-bold mb-2">Pilih Kuartal:</label>
-                <select id="quarterFilter" class="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out">
+            <div>
+                <label for="quarterFilter" class="block text-sm font-semibold text-gray-600 mb-1">Kuartal:</label>
+                <select id="quarterFilter" class="w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
                     <option value="">Semua Kuartal</option>
                     <option value="1">Kuartal 1 (Jan-Mar)</option>
                     <option value="2">Kuartal 2 (Apr-Jun)</option>
@@ -41,175 +39,95 @@
                     <option value="4">Kuartal 4 (Okt-Des)</option>
                 </select>
             </div>
-            <div class="w-full md:w-auto">
-                <label for="topNSalesCategoryInput" class="block text-gray-700 text-sm font-bold mb-2">Top N Kategori:</label>
-                <input type="number" id="topNSalesCategoryInput" value="10" min="1" class="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out">
+            <div>
+                <label for="topNSalesCategoryInput" class="block text-sm font-semibold text-gray-600 mb-1">Top Kategori:</label>
+                <input type="number" id="topNSalesCategoryInput" value="10" min="1" class="w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            <div class="w-full md:w-auto">
-                <label for="topNBrandInput" class="block text-gray-700 text-sm font-bold mb-2">Top N Brand:</label>
-                <input type="number" id="topNBrandInput" value="10" min="1" class="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out">
+            <div>
+                <label for="topNBrandInput" class="block text-sm font-semibold text-gray-600 mb-1">Top Brand:</label>
+                <input type="number" id="topNBrandInput" value="10" min="1" class="w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            <div class="w-full md:w-auto">
-                <label for="topNCustomersInput" class="block text-gray-700 text-sm font-bold mb-2">Top N Pelanggan:</label>
-                <input type="number" id="topNCustomersInput" value="10" min="1" class="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out">
+            <div>
+                <label for="topNCustomersInput" class="block text-sm font-semibold text-gray-600 mb-1">Top Pelanggan:</label>
+                <input type="number" id="topNCustomersInput" value="10" min="1" class="w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            <div class="w-full md:w-auto">
-                <label for="topNDeliveryEmployeeInput" class="block text-gray-700 text-sm font-bold mb-2">Top N Karyawan Pengiriman:</label>
-                <input type="number" id="topNDeliveryEmployeeInput" value="10" min="1" class="shadow border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 ease-in-out">
+            <div>
+                <label for="topNDeliveryEmployeeInput" class="block text-sm font-semibold text-gray-600 mb-1">Top Kurir:</label>
+                <input type="number" id="topNDeliveryEmployeeInput" value="10" min="1" class="w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            <div class="w-full md:w-auto flex justify-end md:justify-start">
-                <button id="applyFilters" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300 ease-in-out mt-4 md:mt-0">
-                    Terapkan Filter
-                </button>
+            <div class="md:col-span-2 lg:col-span-3 text-right">
+                <button id="applyFilters" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md shadow-md font-semibold transition-transform transform hover:scale-105">Terapkan Filter</button>
             </div>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <h3 class="text-lg font-semibold text-gray-600 mb-2">Total Penjualan</h3>
-                <div id="kpiTotalSalesContainer" class="kpi-value-container">
-                    <p id="kpiTotalSales" class="text-4xl font-extrabold text-indigo-600">Memuat...</p>
-                    <div id="loadingTotalSales" class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat...</p>
-                    </div>
-                    <div id="errorTotalSales" class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Error!</p>
-                    </div>
-                </div>
+        <!-- KPI Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">Total Penjualan</h3>
+                <p id="kpiTotalSales" class="text-3xl font-bold text-indigo-600">Memuat...</p>
             </div>
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <h3 class="text-lg font-semibold text-gray-600 mb-2">Total Pesanan</h3>
-                <div id="kpiTotalOrdersContainer" class="kpi-value-container">
-                    <p id="kpiTotalOrders" class="text-4xl font-extrabold text-indigo-600">Memuat...</p>
-                    <div id="loadingTotalOrders" class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat...</p>
-                    </div>
-                    <div id="errorTotalOrders" class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Error!</p>
-                    </div>
-                </div>
+            <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">Total Pesanan</h3>
+                <p id="kpiTotalOrders" class="text-3xl font-bold text-indigo-600">Memuat...</p>
             </div>
-            <div class="bg-white shadow-lg rounded-lg p-6 text-center transform hover:scale-105 transition duration-300 ease-in-out">
-                <h3 class="text-lg font-semibold text-gray-600 mb-2">Rata-rata Penjualan per Pesanan</h3>
-                <div id="kpiAvgSalesPerOrderContainer" class="kpi-value-container">
-                    <p id="kpiAvgSalesPerOrder" class="text-4xl font-extrabold text-indigo-600">Memuat...</p>
-                    <div id="loadingAvgSalesPerOrder" class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat...</p>
-                    </div>
-                    <div id="errorAvgSalesPerOrder" class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Error!</p>
-                    </div>
-                </div>
+            <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300 text-center">
+                <h3 class="text-sm font-semibold text-gray-500 mb-2">Rata-rata per Pesanan</h3>
+                <p id="kpiAvgSalesPerOrder" class="text-3xl font-bold text-indigo-600">Memuat...</p>
             </div>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Tren Penjualan & Pesanan Bulanan</h2>
-                <div class="chart-container" id="monthlySalesChartContainer">
+        <!-- Charts Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Chart containers reused -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Tren Penjualan Bulanan</h2>
+                <div class="chart-container">
                     <canvas id="monthlySalesChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Penjualan per Kategori Produk (Top N)</h2>
-                <div class="chart-container" id="salesByCategoryChartContainer">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Penjualan per Kategori</h2>
+                <div class="chart-container">
                     <canvas id="salesByCategoryChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Penjualan per Brand (Top N)</h2>
-                <div class="chart-container" id="salesByBrandChartContainer">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Penjualan per Brand</h2>
+                <div class="chart-container">
                     <canvas id="salesByBrandChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Pelanggan dengan Pembelian Terbanyak (Top N)</h2>
-                <div class="chart-container" id="topCustomersChartContainer">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Top Pelanggan</h2>
+                <div class="chart-container">
                     <canvas id="topCustomersChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Distribusi Status Pengiriman</h2>
-                <div class="chart-container" id="deliveryStatusChartContainer">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Distribusi Status Pengiriman</h2>
+                <div class="chart-container">
                     <canvas id="deliveryStatusChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Rata-rata Waktu Pengiriman per Kurir</h2>
-                <div class="chart-container" id="avgDeliveryTimeChartContainer">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Rata-rata Waktu Pengiriman</h2>
+                <div class="chart-container">
                     <canvas id="avgDeliveryTimeChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Performa Karyawan Pengiriman (Top N)</h2>
-                <div class="chart-container" id="employeeDeliveryChartContainer">
-                    <canvas id="employeeDeliveryChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white shadow-lg rounded-lg p-6 animate-fade-in">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Distribusi Rating Belanja</h2>
-                <div class="chart-container" id="ratingDistributionChartContainer">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4">Distribusi Rating</h2>
+                <div class="chart-container">
                     <canvas id="ratingDistributionChart"></canvas>
-                    <div class="loading-overlay hidden-overlay">
-                        <div class="spinner"></div><p class="mt-2 text-gray-500 text-sm">Memuat grafik...</p>
-                    </div>
-                    <div class="error-overlay hidden-overlay">
-                        <p class="text-red-500 text-sm">Gagal memuat data.</p>
-                    </div>
                 </div>
             </div>
-        </div>
-        
+        </section>
     </div>
     <script src="/static/dashboard.js"></script>
 </body>
