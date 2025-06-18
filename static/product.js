@@ -237,6 +237,35 @@ cancelProductUpdateButton.addEventListener('click', () => {
     updateProductModal.style.display = 'none';
 });
 
+function searchProducts() {
+    const id_produk = document.getElementById('search_id_produk').value.trim();
+    const nama_produk = document.getElementById('search_nama_produk').value.trim();
+    const brand = document.getElementById('search_brand').value.trim();
+    const id_sub_kategori = document.getElementById('search_id_sub_kategori').value.trim();
+
+    let url = '/api/products?';
+    if (id_produk) url += `id_produk=${encodeURIComponent(id_produk)}&`;
+    if (nama_produk) url += `nama_produk=${encodeURIComponent(nama_produk)}&`;
+    if (brand) url += `brand=${encodeURIComponent(brand)}&`;
+    if (id_sub_kategori) url += `id_sub_kategori=${encodeURIComponent(id_sub_kategori)}&`;
+
+    console.log('Fetching with query:', url);
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to fetch products.");
+            return response.json();
+        })
+        .then(data => renderProducts(data))
+        .catch(error => {
+            console.error('Search failed:', error);
+            productListBody.innerHTML = '';
+            noProductsMessage.classList.remove('hidden');
+        });
+}
+
+
+
 window.addEventListener('click', (e) => {
     // Check if the click is outside the product update modal content
     const productModalContent = updateProductModal.querySelector('.modal-content');

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import pyodbc
 import json
 from flask_cors import CORS
@@ -33,6 +33,25 @@ def get_db_connection():
     return pyodbc.connect(conn_str)
 
 # --- API Endpoints Berorientasi Bisnis ---
+@app.route('/product')
+def product_page():
+    return render_template('product.html')
+
+@app.route('/dashboard')
+def dashboard_page():
+    return render_template('dashboard.html')
+
+@app.route('/penjualan')
+def penjualan_page():
+    return render_template('penjualan.html')
+
+@app.route('/customers')
+def customers_page():
+    return render_template('customers.html')
+
+@app.route('/karyawan')
+def karyawan_page():
+    return render_template('karyawan.html')
 
 # NEW: Endpoint untuk mengambil Key Performance Indicators (KPIs)
 # Filters: Year
@@ -672,27 +691,43 @@ def delete_product(id_produk):
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
-    """
-    Mengambil semua produk dari database.
-    Mengembalikan daftar produk dalam format JSON.
-    """
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT id_produk, nama_produk, brand, id_sub_kategori FROM dim_produk")
-        products = cursor.fetchall()
-        
-        # Mengambil nama kolom dari deskripsi kursor untuk membuat dictionary
-        columns = [column[0] for column in cursor.description]
-        product_list = [dict(zip(columns, row)) for row in products]
-        
-        return jsonify(product_list), 200
-    except pyodbc.Error as e:
-        return jsonify({'error': f"Kesalahan database: {str(e)}"}), 500
+
+        # Ambil parameter query
+        id_produk = request.args.get('id_produk')
+        nama_produk = request.args.get('nama_produk')
+        brand = request.args.get('brand')
+        id_sub_kategori = request.args.get('id_sub_kategori')
+
+        # Bangun query dinamis
+        query = "SELECT id_produk, nama_produk, brand, id_sub_kategori FROM dim_produk WHERE 1=1"
+        params = []
+
+        if id_produk:
+            query += " AND id_produk LIKE ?"
+            params.append(f"%{id_produk}%")
+        if nama_produk:
+            query += " AND nama_produk LIKE ?"
+            params.append(f"%{nama_produk}%")
+        if brand:
+            query += " AND brand LIKE ?"
+            params.append(f"%{brand}%")
+        if id_sub_kategori:
+            query += " AND id_sub_kategori LIKE ?"
+            params.append(f"%{id_sub_kategori}%")
+
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        columns = [col[0] for col in cursor.description]
+        data = [dict(zip(columns, row)) for row in rows]
+        return jsonify(data)
+
     except Exception as e:
-        return jsonify({'error': f"Terjadi kesalahan: {str(e)}"}), 500
+        return jsonify({'error': str(e)}), 500
     finally:
-        if 'conn' in locals() and conn:
+        if 'conn' in locals():
             conn.close()
 
 @app.route('/api/customers', methods=['GET'])

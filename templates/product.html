@@ -6,7 +6,7 @@
     <title>Product Management</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="/static/product.css">
 </head>
 <body class="p-4 md:p-8 lg:p-12">
     <div class="max-w-6xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-lg">
@@ -14,11 +14,11 @@
 
         <!-- Navigation Links (NEW) -->
         <nav class="mb-8 flex justify-center space-x-6 text-xl font-medium">
-            <a href="dashboard.html" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Dashboard</a>
-            <a href="product.html" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Product</a>
-            <a href="customers.html" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Customers</a>
-            <a href="karyawan.html" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Karyawan</a>
-            <a href="penjualan.html" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Penjualan</a>
+            <a href="dashboard" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Dashboard</a>
+            <a href="product" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Product</a>
+            <a href="customers" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Customers</a>
+            <a href="karyawan" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Karyawan</a>
+            <a href="penjualan" class="nav-link text-gray-600 hover:text-gray-800 pb-1">Penjualan</a>
         </nav>
 
         <!-- Notification/Message Area -->
@@ -56,6 +56,18 @@
                 </div>
             </form>
         </div>
+<!-- Search Form -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+    <input id="search_id_produk" type="text" placeholder="ID Produk" class="border px-4 py-2 rounded-md shadow-sm">
+    <input id="search_nama_produk" type="text" placeholder="Nama Produk" class="border px-4 py-2 rounded-md shadow-sm">
+    <input id="search_brand" type="text" placeholder="Brand" class="border px-4 py-2 rounded-md shadow-sm">
+    <input id="search_id_sub_kategori" type="text" placeholder="ID Sub Kategori" class="border px-4 py-2 rounded-md shadow-sm">
+</div>
+<div class="flex justify-end mb-6">
+    <button onclick="searchProducts()" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+        Search
+    </button>
+</div>
 
         <!-- Product List Table -->
         <div class="bg-gray-50 p-6 rounded-lg shadow-inner mb-10">
@@ -120,6 +132,6 @@
         </div>
     </div>
 
-    <script src="product.js"></script>
+    <script src="/static/product.js"></script>
 </body>
 </html>
